@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Secure Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <img src="path/to/your/logo.png" alt="Organization Logo" class="login-logo">
+                <h2>Welcome to Your Secure Dashboard</h2>
+                <p>Please enter your credentials to access your account.</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <password-input-with-toggle>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                    </password-input-with-toggle>
+                </div>
+                <button type="submit" class="login-button">Login</button>
+                <p id="errorMessage" class="error-message"></p>
+            </form>
+            <div class="login-footer">
+                <p>&copy; 2025 Your Organization. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Custom element for password input with toggle (Optional, but good for UX)
+        // If you don't use this, just use a standard input type="password"
+        class PasswordInputWithToggle extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            display: block;
+                            position: relative;
+                        }
+                        input {
+                            width: calc(100% - 40px); /* Adjust for eye icon */
+                            padding: 12px;
+                            margin-bottom: 20px;
+                            border: 1px solid #c9d2da;
+                            border-radius: 6px;
+                            box-sizing: border-box;
+                            font-size: 1.05em;
+                            background-color: #f8fbfd;
+                            color: #333;
+                            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                        }
+                        input:focus {
+                            border-color: #007bff;
+                            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+                            outline: none;
+                        }
+                        .toggle-password {
+                            position: absolute;
+                            right: 10px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            cursor: pointer;
+                            color: #666;
+                            font-size: 0.9em;
+                            user-select: none;
+                        }
+                    </style>
+                    <input type="password">
+                    <span class="toggle-password">Show</span>
+                `;
+                this.input = this.shadowRoot.querySelector('input');
+                this.toggle = this.shadowRoot.querySelector('.toggle-password');
+
+                // Pass through attributes from the host element to the internal input
+                Array.from(this.attributes).forEach(attr => {
+                    if (attr.name !== 'style') { // Avoid copying style attribute
+                        this.input.setAttribute(attr.name, attr.value);
+                    }
+                });
+
+                // Forward id to the internal input
+                if (this.id) {
+                    this.input.id = this.id;
+                }
+
+                // Add event listener to the internal input to dispatch change events
+                this.input.addEventListener('input', (event) => {
+                    this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+                });
+
+
+                this.toggle.addEventListener('click', () => {
+                    if (this.input.type === 'password') {
+                        this.input.type = 'text';
+                        this.toggle.textContent = 'Hide';
+                    } else {
+                        this.input.type = 'password';
+                        this.toggle.textContent = 'Show';
+                    }
+                });
+            }
+
+            // Getter/setter for value to make it accessible from outside
+            get value() {
+                return this.input.value;
+            }
+
+            set value(val) {
+                this.input.value = val;
+            }
+
+            // Observe attribute changes (e.g., if required is added dynamically)
+            static get observedAttributes() { return ['required', 'autocomplete']; }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                if (this.input) {
+                    this.input.setAttribute(name, newValue);
+                }
+            }
+        }
+        customElements.define('password-input-with-toggle', PasswordInputWithToggle);
+    </script>
+</body>
+</html>

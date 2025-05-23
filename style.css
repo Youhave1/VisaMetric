@@ -1,0 +1,443 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f2f5; /* Light background for the whole page */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Prevent scrollbar for initial animations */
+}
+
+/* --- Login Page Styles --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0a1128; /* Dark blue background for login */
+    opacity: 0; /* Initial state for fade-in animation */
+    animation: fadeIn 1s forwards; /* Fade in on load */
+}
+
+.login-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    opacity: 0; /* Initial state for pop-up animation */
+    animation: slideIn 0.8s forwards 0.5s; /* Pop up after container fades in */
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-header h2 {
+    font-family: 'Open Sans', sans-serif;
+    color: #0a1128;
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+.login-header p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: calc(100% - 24px); /* Account for padding */
+    padding: 12px;
+    border: 1px solid #c9d2da;
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: #f8fbfd;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+.login-button {
+    background-color: #007bff; /* Primary blue button */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.error-message {
+    color: #dc3545; /* Red for error messages */
+    margin-top: 15px;
+    font-size: 0.95em;
+    height: 20px; /* Reserve space to prevent layout shift */
+    line-height: 20px;
+}
+
+.login-footer {
+    margin-top: 30px;
+    font-size: 0.85em;
+    color: #888;
+}
+
+/* Animations for Login Page */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Dashboard Styles --- */
+.dashboard-container {
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    opacity: 0; /* Initial state for dashboard fade-in */
+    animation: dashboardFadeIn 1s forwards;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #0a1128; /* Dark blue sidebar */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%); /* Initial state for sidebar slide-in */
+    animation: slideInLeft 0.8s forwards 0.5s;
+}
+
+.sidebar-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.sidebar-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #007bff;
+    margin-bottom: 10px;
+}
+
+.sidebar-header h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.4em;
+    margin: 0;
+    color: #ffffff;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    display: block;
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1.05em;
+}
+
+.sidebar-nav a i {
+    margin-right: 10px;
+    width: 20px; /* Align icons */
+    text-align: center;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: #007bff; /* Highlight on hover/active */
+    color: white;
+}
+
+.sidebar-footer {
+    margin-top: auto; /* Push to bottom */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.logout-button {
+    background-color: #dc3545; /* Red for logout */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0; /* Initial state for main content fade-in */
+    animation: fadeIn 0.8s forwards 1s; /* Fades in after sidebar */
+}
+
+.main-header {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-message {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.8em;
+    color: #0a1128;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    opacity: 0; /* Initial state for welcome message animation */
+    animation: slideInUp 0.8s forwards 1.5s; /* Slides in after main content */
+}
+
+.content-area {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow-y: auto; /* Enable scrolling for content if it overflows */
+}
+
+.dashboard-default-content h1 {
+    font-family: 'Open Sans', sans-serif;
+    color: #007bff;
+    margin-bottom: 15px;
+    font-size: 2.2em;
+}
+
+.dashboard-default-content p {
+    color: #555;
+    line-height: 1.8;
+}
+
+.main-footer {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 30px;
+    font-size: 0.85em;
+    color: #777;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Animations for Dashboard Page */
+@keyframes dashboardFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Design for both pages */
+@media (max-width: 768px) {
+    .login-box {
+        margin: 20px;
+        padding: 30px;
+    }
+
+    .login-header h2 {
+        font-size: 1.6em;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        transform: translateY(-100%); /* Adjust for mobile top */
+        animation: slideInTop 0.8s forwards 0.5s;
+    }
+
+    .sidebar-header {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .sidebar-header h3 { display: none; } /* Hide text on mobile */
+
+    .sidebar-nav {
+        display: none; /* Hide nav by default on small screens, can add a toggle button */
+    }
+
+    .sidebar-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sidebar-nav li {
+        margin: 5px;
+    }
+
+    .sidebar-nav a {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    .sidebar-footer {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .logout-button {
+        width: auto;
+        padding: 8px 15px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .main-header {
+        padding: 15px 20px;
+        font-size: 1.5em;
+    }
+
+    .welcome-message {
+        font-size: 1.5em;
+    }
+
+    .content-area {
+        padding: 20px;
+    }
+    .dashboard-default-content h1 {
+        font-size: 1.8em;
+    }
+
+    @keyframes slideInTop {
+        from { transform: translateY(-100%); }
+        to { transform: translateY(0); }
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 25px;
+    }
+    .login-header h2 {
+        font-size: 1.4em;
+    }
+    .input-group input {
+        padding: 10px;
+    }
+    .login-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+    .main-header {
+        padding: 10px 15px;
+    }
+    .welcome-message {
+        font-size: 1.2em;
+    }
+    .content-area {
+        padding: 15px;
+    }
+    .dashboard-default-content h1 {
+        font-size: 1.5em;
+    }
+}
