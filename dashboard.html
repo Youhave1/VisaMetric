@@ -1,55 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body { display: flex; margin: 0; font-family: Arial; }
+    aside { width: 250px; background: #2c3e50; color: white; padding: 20px; height: 100vh; }
+    aside h2 { margin-bottom: 30px; }
+    aside a { color: white; text-decoration: none; display: block; margin-bottom: 10px; }
+    main { flex-grow: 1; padding: 30px; }
+    button.logout { background: #c0392b; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+  </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="path/to/your/logo.png" alt="Organization Logo" class="sidebar-logo">
-                <h3>Dashboard Menu</h3>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="#" data-page="info-form"><i class="fas fa-file-alt"></i> Information Form</a></li>
-                    <li><a href="#" data-page="details"><i class="fas fa-info-circle"></i> Details</a></li>
-                    <li><a href="#" data-page="case-result"><i class="fas fa-check-circle"></i> Case Result</a></li>
-                    <li><a href="#" data-page="upload-personal-photo"><i class="fas fa-image"></i> Upload Personal Photo</a></li>
-                    <li><a href="#" data-page="upload-passport-photo"><i class="fas fa-passport"></i> Upload Passport Photo</a></li>
-                    <li><a href="#" data-page="upload-other-docs"><i class="fas fa-folder-open"></i> Upload Other Documents</a></li>
-                </ul>
-            </nav>
-            <div class="sidebar-footer">
-                <button id="logoutButton" class="logout-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
-            </div>
-        </aside>
+  <aside>
+    <h2>Dashboard</h2>
+    <nav>
+      <a id="infoLink" target="_blank">Information Form</a>
+      <a id="detailsLink" target="_blank">Details</a>
+      <a id="resultLink" target="_blank">Case Result</a>
+      <a id="photoLink" target="_blank">Upload Personal Photo</a>
+      <a id="passportLink" target="_blank">Upload Passport</a>
+      <a id="docsLink" target="_blank">Other Documents</a>
+    </nav>
+    <br><button class="logout" onclick="logout()">Logout</button>
+  </aside>
+  <main>
+    <h1>Welcome to your dashboard</h1>
+    <p id="userInfo"></p>
+  </main>
 
-        <main class="main-content">
-            <header class="main-header">
-                <div class="welcome-message" id="welcomeMessage">
-                    </div>
-            </header>
+  <script>
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (!user) location.href = "login.html";
 
-            <div class="content-area" id="contentArea">
-                <div id="defaultWelcomeContent" class="dashboard-default-content">
-                    <h1>Welcome to Your Secure Dashboard!</h1>
-                    <p>Use the sidebar navigation to access various sections of your application.</p>
-                </div>
-            </div>
+    document.getElementById('userInfo').innerText = Logged in as: ${user.email};
 
-            <footer class="main-footer">
-                <img src="path/to/your/logo.png" alt="Organization Logo" class="footer-logo">
-                <p>&copy; 2025 Your Organization. All rights reserved.</p>
-            </footer>
-        </main>
-    </div>
+    document.getElementById('infoLink').href = user.links['info-form'];
+    document.getElementById('detailsLink').href = user.links['details'];
+    document.getElementById('resultLink').href = user.links['case-result'];
+    document.getElementById('photoLink').href = user.links['upload-personal-photo'];
+    document.getElementById('passportLink').href = user.links['upload-passport-photo'];
+    document.getElementById('docsLink').href = user.links['upload-other-docs'];
 
-    <script src="script.js"></script>
+    function logout() {
+      sessionStorage.clear();
+      location.href = "login.html";
+    }
+  </script>
 </body>
 </html>
