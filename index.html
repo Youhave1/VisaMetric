@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial; background: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .login-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, button { display: block; width: 100%; margin-bottom: 15px; padding: 10px; }
+    button { background: #007bff; color: white; border: none; }
+  </style>
 </head>
 <body>
   <div class="login-container">
@@ -13,8 +18,8 @@
       <input type="password" id="password" placeholder="Password" required>
       <input type="text" id="caseNumber" placeholder="Case Number" required>
       <button type="submit">Login</button>
+      <p id="errorMsg" style="color:red;"></p>
     </form>
-    <p id="errorMsg" style="color:red;"></p>
   </div>
 
   <script>
@@ -25,8 +30,8 @@
       const password = document.getElementById('password').value;
       const caseNumber = document.getElementById('caseNumber').value;
 
-      const response = await fetch('data.json');
-      const users = await response.json();
+      const res = await fetch('data.json');
+      const users = await res.json();
       const user = users.find(u => u.email === email && u.password === password && u.caseNumber === caseNumber);
 
       if (user) {
