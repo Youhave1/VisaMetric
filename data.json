@@ -1,0 +1,29 @@
+[
+  {
+    "email": "user001@example.com",
+    "password": "pass001",
+    "caseNumber": "CN001",
+    "links": {
+      "info-form": "https://example.com/user001/info-form",
+      "details": "https://example.com/user001/details",
+      "case-result": "https://example.com/user001/case-result",
+      "upload-personal-photo": "https://example.com/user001/upload-personal-photo",
+      "upload-passport-photo": "https://example.com/user001/upload-passport-photo",
+      "upload-other-docs": "https://example.com/user001/upload-other-docs"
+    }
+  },
+  {
+    "email": "user002@example.com",
+    "password": "pass002",
+    "caseNumber": "CN002",
+    "links": {
+      "info-form": "https://example.com/user002/info-form",
+      "details": "https://example.com/user002/details",
+      "case-result": "https://example.com/user002/case-result",
+      "upload-personal-photo": "https://example.com/user002/upload-personal-photo",
+      "upload-passport-photo": "https://example.com/user002/upload-passport-photo",
+      "upload-other-docs": "https://example.com/user002/upload-other-docs"
+    }
+  }
+  // ... up to 500
+]
